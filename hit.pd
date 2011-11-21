@@ -1,0 +1,17 @@
+#N canvas 628 505 291 429 10;
+#X obj -193 -214 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -196 -316 expr if($f1>55 \, 0 \, $f1);
+#X obj -196 -352 inlet;
+#X obj -196 -290 / 55;
+#X obj -149 -351 inlet;
+#X obj -103 -351 inlet;
+#X obj -196 -263 limitbang;
+#X obj -193 -154 outlet;
+#X connect 0 0 7 0;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 3 0 6 0;
+#X connect 4 0 6 1;
+#X connect 5 0 6 2;
+#X connect 6 0 0 0;

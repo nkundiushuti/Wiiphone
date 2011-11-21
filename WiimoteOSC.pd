@@ -1,0 +1,169 @@
+#N canvas 205 167 1475 779 10;
+#X obj -84 -100 unpack 0 0 0;
+#X obj 71 -103 unpack 0 0;
+#X obj 226 -103 unpack 0 0;
+#X floatatom -84 33 5 0 0 0 - - -;
+#X obj -81 71 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 3056 1;
+#X obj 148 135 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 165 152 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 130 152 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 149 170 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj -14 -194 oscx/OSCroute /wii /nunchuk;
+#X obj 758 -92 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 759 -70 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 438 -149 oscx/OSCroute /acc /orientation /joystick /button;
+#X obj 587 -81 hsl 128 15 -1 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 6350 1;
+#X obj 584 -110 unpack 0 0;
+#X obj 721 -80 vsl 15 128 -1 1 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 6350 1;
+#X obj -14 -149 oscx/OSCroute /acc /orientation /point /button;
+#X floatatom 0 36 5 0 0 0 - - -;
+#X obj 59 73 vsl 15 128 0 255 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 3055 1;
+#X floatatom 51 35 5 0 0 0 - - -;
+#X text -78 16 X;
+#X text 2 19 Z;
+#X text 56 14 Y;
+#X floatatom 80 -70 5 0 0 0 - - -;
+#X floatatom 119 -70 5 0 0 0 - - -;
+#X obj 411 -102 unpack 0 0 0;
+#X floatatom 411 -2 5 0 0 0 - - -;
+#X obj 414 24 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 3100 1;
+#X floatatom 495 -2 5 0 0 0 - - -;
+#X obj 551 22 vsl 15 128 0 255 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 3100 1;
+#X floatatom 551 -5 5 0 0 0 - - -;
+#X text 417 -19 X;
+#X text 497 -19 Z;
+#X text 551 -24 Y;
+#X obj 610 -9 unpack 0 0;
+#X floatatom 619 24 5 0 0 0 - - -;
+#X floatatom 658 24 5 0 0 0 - - -;
+#X text 599 -130 Joystick;
+#X text 759 -137 Buttons;
+#X text 608 -27 roll + pitch;
+#X text 76 -119 roll + pitch;
+#X floatatom 226 -78 5 0 0 0 - - -;
+#X floatatom 283 -76 5 0 0 0 - - -;
+#X obj 758 -119 oscx/OSCroute /c /z;
+#X obj 31 96 vsl 20 80 0 255 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 5277 1;
+#X obj 494 58 vsl 20 80 0 255 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 5267 1;
+#X obj 148 104 oscx/OSCroute /up /right /left /down /a /b /minus /home
+/plus /one /two;
+#X obj 263 150 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 290 154 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 321 154 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 354 154 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 385 154 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 415 154 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 448 154 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 480 -222 eliminate if using Mac + Darwin;
+#X text 120 -222 Change to your Wiimote number (check classborad);
+#X text 104 -252 Port used by this Windows WiiRemote setup;
+#X obj -14 -222 oscx/OSCroute;
+#X text 474 -252 5600 for the Mac version using Darwin \, 55555 windows
+;
+#X obj -15 -251 oscx/dumpOSC 5600;
+#X obj 64 -41 s pitch;
+#X obj 122 -40 s roll;
+#X obj 619 50 s n_pitch;
+#X obj 793 -81 s n_b1;
+#X obj 784 -53 s n_b2;
+#X obj 607 -55 s n_j_d;
+#X obj 724 69 s n_j_u;
+#X obj -84 99 s accX;
+#X obj 59 220 s accY;
+#X obj 7 203 s accZ;
+#X obj 616 250 vsl 15 70 0 127 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 27 1;
+#X obj 650 251 vsl 15 70 0 127 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 0 1;
+#X floatatom 606 350 5 0 0 0 - - -;
+#X floatatom 656 352 5 0 0 0 - - -;
+#X obj 583 216 average 20;
+#X obj 671 217 average 20;
+#X obj 389 188 s plus;
+#X obj 316 187 s minus;
+#X obj 258 184 s btA;
+#X connect 0 0 3 0;
+#X connect 0 1 17 0;
+#X connect 0 2 19 0;
+#X connect 1 0 23 0;
+#X connect 1 1 24 0;
+#X connect 2 0 41 0;
+#X connect 2 1 42 0;
+#X connect 3 0 4 0;
+#X connect 4 0 67 0;
+#X connect 9 0 16 0;
+#X connect 9 1 12 0;
+#X connect 10 0 63 0;
+#X connect 11 0 64 0;
+#X connect 12 0 25 0;
+#X connect 12 1 34 0;
+#X connect 12 2 14 0;
+#X connect 12 3 43 0;
+#X connect 13 0 65 0;
+#X connect 14 0 13 0;
+#X connect 14 1 15 0;
+#X connect 15 0 66 0;
+#X connect 16 0 0 0;
+#X connect 16 1 1 0;
+#X connect 16 2 2 0;
+#X connect 16 3 46 0;
+#X connect 17 0 44 0;
+#X connect 18 0 68 0;
+#X connect 19 0 18 0;
+#X connect 23 0 60 0;
+#X connect 24 0 61 0;
+#X connect 25 0 26 0;
+#X connect 25 1 28 0;
+#X connect 25 2 30 0;
+#X connect 26 0 27 0;
+#X connect 28 0 45 0;
+#X connect 30 0 29 0;
+#X connect 34 0 35 0;
+#X connect 34 1 36 0;
+#X connect 35 0 62 0;
+#X connect 35 0 74 0;
+#X connect 36 0 75 0;
+#X connect 43 0 10 0;
+#X connect 43 1 11 0;
+#X connect 44 0 69 0;
+#X connect 46 0 5 0;
+#X connect 46 1 6 0;
+#X connect 46 2 7 0;
+#X connect 46 3 8 0;
+#X connect 46 4 47 0;
+#X connect 46 5 48 0;
+#X connect 46 6 49 0;
+#X connect 46 7 50 0;
+#X connect 46 8 51 0;
+#X connect 46 9 52 0;
+#X connect 46 10 53 0;
+#X connect 47 0 78 0;
+#X connect 49 0 77 0;
+#X connect 51 0 76 0;
+#X connect 57 0 9 0;
+#X connect 59 0 57 0;
+#X connect 70 0 72 0;
+#X connect 71 0 73 0;
+#X connect 74 0 70 0;
+#X connect 75 0 71 0;

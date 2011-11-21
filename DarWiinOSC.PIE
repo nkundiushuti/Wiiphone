@@ -1,0 +1,128 @@
+﻿//------------------------------------------------------------------------------
+// Bosi Mathieu 2010
+// DarwiinRemoteOSC compatible script
+// (not all of the functions are implemented yet)
+//------------------------------------------------------------------------------
+
+
+// OSC setup:
+if (var.setup == false) then
+// (in theory non-reserved ports are in the range between 49152 and 65535)
+ Osc1.port = 5600 // Port used by DarWiinRemoteOSC by default
+ Osc1.ip = "127.0.0.1"  // "localhost" // "192.168.0.10"
+ Osc1.broadcast = false
+ //Osc1.ip = "193.145.43.196"
+
+ Osc1.ListenPort = 5601
+ Osc1.Listening  = true
+
+ var.setup = true
+endif
+
+//----------------------------------------------
+// Variables creation / assignement
+//  var.x = Osc2.wiimote.foo.bar
+//
+// Internal to OSC address translation:
+//  Osc1.wiimote.foo.bar --> /wiimote/foo/bar
+//
+//   See GlovePIE reference manual for further details
+//
+//----------------------------------------------
+
+
+//------------------------------------------------------------------------------
+// Show Wiimote IDs on the wiimotes themselves:
+var.count = Wiimote.Count 
+Debug = "You have " + var.count + " Wiimotes connected to your computer." 
+
+if var.count = 1 
+ Wiimote1.Led1 = True
+endif 
+
+if var.count = 2 
+ Wiimote1.Led1 = True
+ Wiimote2.Led2 = True
+endif 
+
+if var.count = 3 
+ Wiimote1.Led1 = True
+ Wiimote2.Led2 = True
+ Wiimote3.Led3 = True
+endif 
+
+if var.count = 4 
+ Wiimote1.Led1 = True
+ Wiimote2.Led2 = True
+ Wiimote3.Led3 = True
+ Wiimote4.Led4 = True
+endif
+
+
+//------------------------------------------------------------------------------
+// Range scaling constants for Acceleration values
+// to transfer the range -3g / 3g to the DarWiinRemoteOSC 0-255 range
+// (the Wiimote's ADXL330 has a range of +/- 3g)
+var.Gk = 127.5 / (9.8*3.0); // scaling constant
+var.Go = 127.5; // base offset
+
+//------------------------------------------------------------------------------
+//                     WiiMote
+//------------------------------------------------------------------------------
+// Send Accelerometer and Orientation data:
+SendOsc(Osc1.ip, Osc1.port, "/wii/acc", float(WiiMote1.RawAccX*var.Gk+var.Go), float(WiiMote1.RawAccY*var.Gk+var.Go), float(WiiMote1.RawAccZ*var.Gk+var.Go));
+SendOsc(Osc1.ip, Osc1.port, "/wii/orientation", float(WiiMote1.SmoothRoll), float(WiiMote1.SmoothPitch));
+
+// "A"  "B"
+if(Pressed(wiimote1.A))  then Osc1.wii.button.a = 1
+if(Released(wiimote1.A)) then Osc1.wii.button.a = 0
+if(Pressed(wiimote1.B))  then Osc1.wii.button.b = 1
+if(Released(wiimote1.B)) then Osc1.wii.button.b = 0
+
+// Control Pad
+if(Pressed(wiimote1.Left))   then Osc1.wii.button.left = 1
+if(Released(wiimote1.Left))  then Osc1.wii.button.left = 0
+if(Pressed(wiimote1.Right))  then Osc1.wii.button.right = 1
+if(Released(wiimote1.Right)) then Osc1.wii.button.right = 0
+if(Pressed(wiimote1.Up))     then Osc1.wii.button.up = 1
+if(Released(wiimote1.Up))    then Osc1.wii.button.up = 0
+if(Pressed(wiimote1.Down))   then Osc1.wii.button.down = 1
+if(Released(wiimote1.Down))  then Osc1.wii.button.down = 0
+
+
+// "-"  "home"  "+"
+if(Pressed(wiimote1.Minus))  then Osc1.wii.button.minus = 1
+if(Released(wiimote1.Minus)) then Osc1.wii.button.minus = 0
+if(Pressed(wiimote1.Home))   then Osc1.wii.button.home = 1
+if(Released(wiimote1.Home))  then Osc1.wii.button.home = 0
+if(Pressed(wiimote1.Plus))   then Osc1.wii.button.plus = 1
+if(Released(wiimote1.Plus))  then Osc1.wii.button.plus = 0
+
+
+// "1"  "2"
+if(Pressed(wiimote1.One))  then Osc1.wii.button.one = 1
+if(Released(wiimote1.One)) then Osc1.wii.button.one = 0
+if(Pressed(wiimote1.Two))  then Osc1.wii.button.two = 1
+if(Released(wiimote1.Two)) then Osc1.wii.button.two = 0
+
+
+
+//------------------------------------------------------------------------------
+// Nunchuk Controller:
+//------------------------------------------------------------------------------
+
+// Send Accelerometer and Orientation data:
+SendOsc(Osc1.ip, Osc1.port, "/nunchuk/acc", float(Wiimote1.Nunchuk.RawAccX*var.Gk+var.Go), float(Wiimote1.Nunchuk.RawAccY*var.Gk+var.Go), float(Wiimote1.Nunchuk.RawAccZ*var.Gk+var.Go));
+SendOsc(Osc1.ip, Osc1.port, "/nunchuk/orientation", float(Wiimote1.Nunchuk.SmoothRoll), float(Wiimote1.Nunchuk.SmoothPitch));
+SendOsc(Osc1.ip, Osc1.port, "/nunchuk/joystick", float(Wiimote1.Nunchuk.JoyX), float(Wiimote1.Nunchuk.JoyY));
+
+// "C"  "Z" buttons
+if(Pressed(Wiimote1.Nunchuk.CButton))  then Osc1.nunchuk.button.c = 1
+if(Released(Wiimote1.Nunchuk.CButton)) then Osc1.nunchuk.button.c = 0
+if(Pressed(Wiimote1.Nunchuk.ZButton))  then Osc1.nunchuk.button.z = 1
+if(Released(Wiimote1.Nunchuk.ZButton)) then Osc1.nunchuk.button.z = 0
+
+
+
+// COMPILED CODE, PLEASE DELETE BEFORE COMPILING!
+
